@@ -1,49 +1,101 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const rsvpButton = document.getElementById('rsvp-btn');
+    // URL de Implantação do Google Apps Script (Backend)
+    const GOOGLE_APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8oX2gPEZk8Z0qdVZPtozFT011ktpacpEKZiBhWE_yUEWI6bSI2KHIy26g3z8CqiD7kA/exec';
+
+    // Elementos da Interface
+    // NOTA: Ajustei o seletor para rsvp-btn, que não estava no HTML anterior, 
+    // mas assumi que é o botão que abre o formulário.
+    const rsvpButton = document.getElementById('rsvp-btn'); 
     const rsvpFormArea = document.getElementById('form-area');
     const rsvpForm = document.getElementById('rsvp-form-submission');
     const formMessage = document.getElementById('form-message');
 
+    // Estado inicial do formulário (escondido)
+    if (rsvpFormArea) {
+        rsvpFormArea.style.display = 'none';
+    }
+
+
     // 1. Mostrar/Esconder o Formulário de RSVP ao clicar no botão CTA
-    rsvpButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Previne o comportamento padrão (ex: link)
+    if (rsvpButton && rsvpFormArea) {
+        rsvpButton.addEventListener('click', (event) => {
+            event.preventDefault();
 
-        // Alterna a visibilidade do formulário
-        if (rsvpFormArea.style.display === 'none' || rsvpFormArea.style.display === '') {
-            rsvpFormArea.style.display = 'block';
-            rsvpButton.textContent = 'Obrigado(a)! Agora preencha os dados abaixo.';
-            rsvpButton.classList.add('cta-hidden'); // Adiciona classe para desativar/esconder o botão após clique
+            if (rsvpFormArea.style.display === 'none' || rsvpFormArea.style.display === '') {
+                rsvpFormArea.style.display = 'block';
+                
+                // Mude o texto do botão para indicar que a ação foi realizada ou
+                // Adicione a classe para escondê-lo/desativá-lo
+                rsvpButton.textContent = 'Obrigado(a)! Agora preencha os dados abaixo.';
+                rsvpButton.classList.add('cta-hidden'); 
+                
+                // Rola a tela para o formulário
+                rsvpFormArea.scrollIntoView({ behavior: 'smooth' });
+
+            } else {
+                rsvpFormArea.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // 2. Envio REAL do Formulário para o Google Sheets
+    if (rsvpForm && formMessage) {
+        rsvpForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // 1. Prepara os dados
+            const formData = new FormData(rsvpForm);
+            // Converte para URLSearchParams, que o Google Apps Script espera no POST
+            const data = new URLSearchParams(formData);
+
+            // 2. Feedback visual inicial
+            formMessage.style.color = '#797b77'; // Cor de carregamento
+            formMessage.textContent = 'Enviando sua confirmação... Por favor, aguarde.';
             
-            // Rola a tela para o formulário
-            rsvpFormArea.scrollIntoView({ behavior: 'smooth' });
+            // Desativa o botão de envio para evitar cliques duplos
+            const submitButton = rsvpForm.querySelector('.submit-button');
+            submitButton.disabled = true;
 
-        } else {
-            // Se já estiver aberto, apenas rola para a visualização
-            rsvpFormArea.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+            try {
+                // 3. Envio da Requisição
+                const response = await fetch(GOOGLE_APP_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Necessário para evitar erros de CORS no GitHub Pages
+                    body: data, 
+                });
 
-    // 2. Simular o Envio do Formulário (No mundo real, você usaria Fetch API para enviar a um servidor ou Google Forms)
-    rsvpForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+                // 4. Sucesso na comunicação (como usamos 'no-cors', não verificamos response.ok)
+                
+                // Coleta dados para a mensagem de sucesso personalizada (apenas do JS)
+                const name = formData.get('name');
+                const adults = formData.get('adults');
+                const kids = formData.get('kids');
 
-        // Coleta dados (apenas para exibição na simulação)
-        const name = rsvpForm.querySelector('input[name="name"]').value;
-        const adults = rsvpForm.querySelector('input[name="adults"]').value;
-        const kids = rsvpForm.querySelector('input[name="kids"]').value;
+                formMessage.style.color = 'green';
+                formMessage.textContent = `Confirmação de ${adults} adulto(s) e ${kids} criança(s) enviada com sucesso para ${name}! Um abraço!`;
+                
+                rsvpForm.reset(); // Limpa o formulário
 
-        // Limpa os campos após a "simulação de envio"
-        rsvpForm.reset();
+                // 5. Esconde o formulário após 5 segundos e reseta o botão CTA
+                setTimeout(() => {
+                    if (rsvpFormArea) rsvpFormArea.style.display = 'none';
+                    formMessage.textContent = '';
+                    if (rsvpButton) {
+                        // Texto original do CTA (ajuste para o seu texto real)
+                        rsvpButton.textContent = '👉 VOU ESCALAR ESTA MONTANHA PARA CELEBRAR! 👈'; 
+                        rsvpButton.classList.remove('cta-hidden');
+                    }
+                }, 5000);
 
-        // Exibe mensagem de sucesso
-        formMessage.textContent = `Confirmação de ${adults} adulto(s) e ${kids} criança(s) enviada com sucesso para ${name}! Um abraço!`;
-        
-        // Esconde o formulário após 5 segundos e reseta o botão
-        setTimeout(() => {
-            rsvpFormArea.style.display = 'none';
-            formMessage.textContent = '';
-            rsvpButton.textContent = '👉 VOU ESCALAR ESTA MONTANHA PARA CELEBRAR! 👈'; // Texto original do CTA
-            rsvpButton.classList.remove('cta-hidden');
-        }, 5000);
-    });
+            } catch (error) {
+                // 6. Trata Erros de Rede ou Script (Raramente ocorre com no-cors, mas é bom ter)
+                console.error('Erro de envio:', error);
+                formMessage.style.color = 'red';
+                formMessage.textContent = 'Falha ao enviar a confirmação. Por favor, verifique sua conexão e tente novamente.';
+            } finally {
+                // 7. Reativa o botão de envio
+                submitButton.disabled = false;
+            }
+        });
+    }
 });
