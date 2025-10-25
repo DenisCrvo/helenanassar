@@ -1,7 +1,7 @@
 // --- CÓDIGO PARA O FORMULÁRIO ---
 
 // 1. Cole aqui a URL do seu aplicativo da web do Google Apps Script.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7-MtnT6T-oLSF0lHUg6iKooMsPAwUHcI7P9GHbZPHHbrPTRX8ajJ7mIzNKWhvh79qNQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXR13dWG_A4OJt4aO4s0wOpHGzNG8TODbxJrRALhWDO3jChxcuqXGR3uGwAuwDJGkIZA/exec';
 
 // 2. Pega os elementos do HTML que vamos usar.
 const form = document.getElementById('form-presenca');
