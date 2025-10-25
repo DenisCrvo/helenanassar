@@ -71,26 +71,26 @@
         </section>
 
         <section class="section-rsvp">
-            <div class="container">
-                <h3 class="section-title">Confirmação de Presença</h3>
-                <p class="rsvp-text">Para que possamos preparar o nosso coro e as guloseimas, por favor, confirme sua presença até o dia <strong>05/12</strong>.</p>
-
-                <a href="#form-area" class="cta-button" id="rsvp-btn">
-                    👉 VOU ESCALAR ESTA MONTANHA PARA CELEBRAR! 👈
-                </a>
-
-                <div id="form-area" class="rsvp-form" style="display: none;">
-                    <h4>Preencha abaixo:</h4>
-                    <form id="rsvp-form-submission">
-                        <input type="text" name="name" placeholder="Seu Nome Completo" required>
-                        <input type="number" name="adults" placeholder="Nº de Adultos" min="1" required>
-                        <input type="number" name="kids" placeholder="Nº de Crianças (0 a 10 anos)" min="0" required>
-                        <textarea name="message" placeholder="Mensagem opcional (ex: sugestão de música)"></textarea>
-                        <button type="submit" class="submit-button">Enviar Confirmação</button>
-                    </form>
-                    <p id="form-message" style="margin-top: 15px; color: green;"></p>
-                </div>
-
+            <div id="form-area" class="rsvp-form" style="display: none;">
+                <h4>Preencha abaixo:</h4>
+                <!-- O ID do formulário foi atualizado para "form-presenca" -->
+                <form id="form-presenca">
+                    <!-- ATUALIZADO: name="nomeCompleto" -->
+                    <input type="text" name="nomeCompleto" placeholder="Seu Nome Completo" required>
+                
+                    <!-- ATUALIZADO: name="adultos" -->
+                    <input type="number" name="adultos" placeholder="Nº de Adultos" min="1" required>
+                
+                    <!-- ATUALIZADO: name="criancas" -->
+                    <input type="number" name="criancas" placeholder="Nº de Crianças (0 a 10 anos)" min="0" required>
+                
+                    <!-- ATUALIZADO: name="mensagem" -->
+                    <textarea name="mensagem" placeholder="Mensagem opcional (ex: sugestão de música)"></textarea>
+                
+                    <button type="submit" class="submit-button">Enviar Confirmação</button>
+                </form>
+                <!-- O ID da mensagem de status foi atualizado para "mensagem-status" -->
+                <p id="mensagem-status" style="margin-top: 15px;"></p>
             </div>
         </section>
     </main>
