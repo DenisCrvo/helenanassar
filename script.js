@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // URL de Implantação do Google Apps Script (Backend)
-    const GOOGLE_APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDnrjJjb0TyGoIscFxJ3pFfy8YkOYe4F_mRmgDYXErxaw01wd5kv9yOrYmF9TjU2OA_w/exec';
+    const GOOGLE_APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbykNeJp6gkiDtoob3RTj79RjPFuCURj4Zv-kg3mPi6o2zV20mVJA4pvsUCqRy2krqOSJg/exec';
 
     // Elementos da Interface
     // NOTA: Ajustei o seletor para rsvp-btn, que não estava no HTML anterior, 
