@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do-Re-Mi... Maria Helena Faz 2 Anos! 🎶</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1 class="main-title">🎶 Do-Re-Mi... Maria Helena Faz 2 Anos! 🎵</h1>
+            <h2 class="subtitle">A Família Nassar Carvalho convida para a nossa Festa "A Noviça Rebelde"!</h2>
+            <div class="photo-placeholder">
+                <img src="img/helena.png" alt="Maria Helena" class="maria-helena-photo">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-info">
+            <div class="container">
+                <h3 class="section-title">Nossas Coisas Favoritas (My Favorite Things)!</h3>
+                <p class="description-text">Nossa pequena Maria Helena completou dois anos de vida e nos ensinou a cantar com alegria! Venha celebrar conosco a vida e a música!</p>
+
+                <div class="event-details">
+                    <div class="detail-block">
+                        <h4>📅 Data e Hora da Festa:</h4>
+                        <p><strong>Sábado, 20 de Dezembro</strong></p>
+                        <p>⏰ 10:00h às 13:00h</p>
+                    </div>
+                    <div class="detail-block">
+                        <h4>📍 Local da Festa:</h4>
+                        <p><strong>Novo Quintal (Shopping Recife)</strong></p>
+                        <p>R. Padre Carapuceiro, 777 - Boa Viagem</p>
+                        <a href="https://maps.app.goo.gl/MgY4TEfwGo6wGcNz6" target="_blank" class="map-link">Ver no Mapa</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-attractions">
+            <div class="container">
+                <h3 class="section-title">O que Esperar (Climb Ev'ry Mountain):</h3>
+
+                <div class="attraction-grid">
+                    <div class="attraction-item">
+                        <span class="icon">🎼</span>
+                        <h4>Brincadeiras Dó-Ré-Mi</h4>
+                        <p>Brincadeiras e atividades divertidas e teatrinho de mamulengo.</p>
+                    </div>
+                    <div class="attraction-item">
+                        <span class="icon">🍰</span>
+                        <h4>Piquenique Austríaco</h4>
+                        <p>Buffet com comidas deliciosas, incluindo tortas, doces e salgados deliciosos.</p>
+                    </div>
+                    <div class="attraction-item">
+                        <span class="icon">🎁</span>
+                        <h4>Presentes</h4>
+                        <p>Sua presença é nossa canção favorita, mas caso queira presenteá-la, ela veste Tam 3 e calça 24.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-rsvp">
+                <h3 class="section-title">Confirme Sua Presença!</h3>
+                    <p class="rsvp-text">Por favor, confirme sua presença até o dia 10 de Dezembro para nos ajudar na organização.</p>
+            <button id="show-form-btn" class="cta-button">Vou Confirmar!</button>
+            <div id="form-area" class="rsvp-form" style="display: none;">
+                <h4>Preencha abaixo:</h4>
+                <!-- O ID do formulário foi atualizado para "form-presenca" -->
+                <form id="form-presenca">
+                    <!-- ATUALIZADO: name="nomeCompleto" -->
+                    <input type="text" name="nomeCompleto" placeholder="Seu Nome Completo" required>
+                
+                    <!-- ATUALIZADO: name="adultos" -->
+                    <input type="number" name="adultos" placeholder="Nº de Adultos" min="1" required>
+                
+                    <!-- ATUALIZADO: name="criancas" -->
+                    <input type="number" name="criancas" placeholder="Nº de Crianças (0 a 12 anos)" min="0" required>
+                
+                    <!-- ATUALIZADO: name="mensagem" -->
+                    <textarea name="mensagem" placeholder="Mensagem opcional"></textarea>
+                
+                    <button type="submit" class="submit-button">Enviar Confirmação</button>
+                </form>
+                <!-- O ID da mensagem de status foi atualizado para "mensagem-status" -->
+                <p id="mensagem-status" style="margin-top: 15px;"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Traje Sugerido:</strong> Roupas de cortina ou de festa, tanto faz. O importante é a alegria!</p>
+            <p>Para dúvidas, contate a Mamãe no: (81) 99915-8421 ou Papai no: (81) 99736-7105.</p>
+            <p>Nossa família espera por você para um dia cheio de música e amor!</p>
+            <p>&copy; 2025 Aniversário Maria Helena.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
